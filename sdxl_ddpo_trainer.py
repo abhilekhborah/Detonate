@@ -62,7 +62,7 @@ class Trainer:
         # Initialize variables here
         self.output_dir = "results/sdxl-model-aligned-ddpo"
         self.logging_dir = "results/logs"
-        self.csv_path = "/scratch/user/hasnat.md.abdullah/DPO-Kernel/data/output_pairs_dpo_race_subset_with_prompts.csv"  # Update with your CSV path
+        self.csv_path = "DPO-Kernel/data/output_pairs_dpo_race_subset_with_prompts.csv"  # Update with your CSV path
 
         self.train_batch_size = 2
         self.num_train_epochs = 5 # Use num_train_epochs to control training

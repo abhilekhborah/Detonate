@@ -40,13 +40,13 @@ def generate_dpo_dataset_from_csv(csv_path):
     print(f"Loaded {len(data)} rows from the CSV file.")
 
     # Filter out any rows where image paths do not exist
-    image_base_path = '/scratch/user/hasnat.md.abdullah/DPO-Kernel/data'
+    image_base_path = 'DPO-Kernel/data'
     data['jpg_0'] = data['jpg_0'].apply(lambda x: x.replace(
-        "/work/kaippilr/detox/h2i_hatespeech_to_image-main/src/sd3.5/generate_images_pos_race",
+        "sd3.5/generate_images_pos_race",
         os.path.join(image_base_path, "output_pairs_dpo_race_subset")
     ))
     data['jpg_1'] = data['jpg_1'].apply(lambda x: x.replace(
-        "/work/kaippilr/detox/h2i_hatespeech_to_image-main/src/sd3.5/generate_images_pos_race",
+        "sd3.5/generate_images_pos_race",
         os.path.join(image_base_path, "output_pairs_dpo_race_subset")
     ))
 
@@ -66,7 +66,7 @@ class Trainer:
         # Initialize variables here
         self.output_dir = "results/sdxl-model-aligned-ddpo"
         self.logging_dir = "results/logs"
-        self.csv_path = "/scratch/user/hasnat.md.abdullah/DPO-Kernel/data/output_pairs_dpo_race_subset_with_prompts.csv"  # Update with your CSV path
+        self.csv_path = "DPO-Kernel/data/output_pairs_dpo_race_subset_with_prompts.csv"  # Update with your CSV path
         self.train_batch_size = 2
         self.num_train_epochs = 5  # Use num_train_epochs to control training
         self.gradient_accumulation_steps = 128
@@ -425,18 +425,13 @@ class Trainer:
                     #TODO Compute loss
 
                     #TODO log_pr_diff = log(model_win_pred) - log(model_lose_pred) 
-                    
                     # use softmax to normalize the predictions weights
                     model_log_pr_diff = torch.log((F.softmax(model_win_pred, dim=1)+1e-10) /(F.softmax(model_loss_pred, dim =1 )+1e-10)) # added 1e-10 to avoid log(0)
-
                     #TODO log_emb_diff = log(winner_emb) - log(loser_emb)
                     winner_pixel_values,loser_pixel_values = torch.chunk(batch["pixel_values"], chunks=2, dim=1)
-
                     # extracting the pixel values from the tensor
                     winner_pixel_values = [img.squeeze(0).permute(1, 2, 0).cpu().numpy().astype(np.uint8) for img in winner_pixel_values]
                     loser_pixel_values = [img.squeeze(0).permute(1, 2, 0).cpu().numpy().astype(np.uint8) for img in loser_pixel_values]
-
-                    # loser_pixel_values = loser_pixel_values.squeeze(0).permute(1, 2, 0).cpu().numpy().astype(np.uint8)
 
                     # convert the pixel values to image embeddings
                     winner_img_emb = self.image_embedding_model.encode_images(winner_pixel_values)# ndarray
@@ -454,19 +449,13 @@ class Trainer:
                     # polynomial
                     elif args.kernel == 'polynomial':
                         kernelized_winner_img_emb_prompt_emb = self.kernel_functions.polynomial_kernel(torch.tensor(winner_img_emb), torch.tensor(prompt_embeds))
-                        kernelized_loser_img_emb_prompt_emb = self.kernel_functions.polynomial_kernel(torch.tensor(loser_img_emb),torch.tensor(prompt_embeds))
-                                       
-                    # emb_diff = kernelized_winner_img_emb_prompt_emb - kernelized_loser_img_emb_prompt_emb # rbf kernel returns scalar values
-                    # print(f"emb_diff: {emb_diff}")
-                    # putting the embedding difference to the device
-                    # emb_diff = emb_diff.to(model_log_pr_diff.device)
+                        kernelized_loser_img_emb_prompt_emb = self.kernel_functions.polynomial_kernel(torch.tensor(loser_img_emb),torch.tensor(prompt_embeds))       
+ 
                     # log diff of the emb diff 
                     log_emb_diff = torch.log((kernelized_winner_img_emb_prompt_emb+1e-10)/(kernelized_loser_img_emb_prompt_emb+1e-10)) # added 1e-10 to avoid log(0)
                     # print(f"log_emb_diff: {log_emb_diff}")
                     log_emb_diff = log_emb_diff.to(model_log_pr_diff.device)
-                    # exit()
-                    
-
+                
                     # TODO Alternative Divergence: KL Divergence
                     def kl_divergence(p, q, epsilon=1e-10):
                         # Clamp values to avoid numerical instability
