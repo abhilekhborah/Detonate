@@ -4,6 +4,8 @@ This repository contains implementation of methods and metrics introduced in the
 
 ![Abstract](abstract.png)
 
+More comparative samples are in [data_samples.md](/data_samples.md) dile
+
 
 ## Implementation of SDXL+DDPO
 - We reproduce [DDPO](https://github.com/SalesforceAIResearch/DiffusionDPO?tab=readme-ov-file) alignment implementation with SD-XL model in [`sdxl_ddpo_trainer.py`](/sdxl_ddpo_trainer.py) file. 
