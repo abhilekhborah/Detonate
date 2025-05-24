@@ -4,7 +4,7 @@ This repository contains implementation of methods and metrics introduced in the
 
 ![Abstract](abstract.png)
 
-More comparative samples are in [data_samples.md](/data_samples.md) dile
+More comparative samples are in [data_samples.md](data_samples.md) dile
 
 
 ## Implementation of SDXL+DDPO
