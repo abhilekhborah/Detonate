@@ -6,7 +6,7 @@ This repository contains implementation of methods and metrics introduced in the
 
 More comparative samples are in [data_samples.md](data_samples.md) dile (If you are in anonymous git site click [here](https://anonymous.4open.science/r/Detonate-891C/data_samples.md))
 
-![](sdxl_ddpo/outputs_sdxl_vanilla_8k_race/prompt_1/image_1.png)
+
 ## Method Comparison
 
 ### Table 10: Comparison of Methods by Axioms
