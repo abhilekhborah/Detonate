@@ -4,7 +4,7 @@ This repository contains implementation of methods and metrics introduced in the
 
 ![Abstract](abstract.png)
 
-More comparative samples are in [data_samples.md](data_samples.md) dile
+More comparative samples are in [data_samples.md](data_samples.md) dile (If you are in anonymous git site click [here](https://anonymous.4open.science/r/Detonate-891C/data_samples.md))
 
 
 ## Implementation of SDXL+DDPO
