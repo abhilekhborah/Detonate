@@ -2,9 +2,11 @@
 
 This repository contains implementation of methods and metrics introduced in the paper titled "DETONATE - A Benchmark for Text-to-Image Alignment and Kernelized Direct Preference Optimization"
 
-![Abstract](abstract.png)
+<div align="center">
+    <img src="abstract.png" alt="Abstract">
+</div>
 
-More comparative samples are in [data_samples.md](data_samples.md) dile (If you are in anonymous git site click [here](https://anonymous.4open.science/r/Detonate-891C/data_samples.md))
+<!-- More comparative samples are in [data_samples.md](data_samples.md) dile (If you are in anonymous git site click [here](https://anonymous.4open.science/r/Detonate-891C/data_samples.md)) -->
 
 
 ## Method Comparison
