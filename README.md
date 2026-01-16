@@ -1,4 +1,4 @@
-# Repository for "DETONATE - A Benchmark for Text-to-Image Alignment and Kernelized Direct Preference Optimization (AAAI 2026 (AI Alignment Track, ORAL)"
+# Repository for "DETONATE - A Benchmark for Text-to-Image Alignment and Kernelized Direct Preference Optimization - AAAI 2026 (AI Alignment Track, ORAL)"
 
 This repository contains implementation of methods and metrics introduced in the paper titled "DETONATE - A Benchmark for Text-to-Image Alignment and Kernelized Direct Preference Optimization"
 
